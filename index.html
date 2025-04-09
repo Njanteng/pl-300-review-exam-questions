@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Course Review</title>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div class="container">
+      <div id="start-page">
+        <h1>🌙 PL-300 QUESTIONS FROM MY LEARNING</h1>
+        <p style="text-align: center; font-size: 1.1rem">
+          Knowledge review one section at a time.
+        </p>
+
+        <!-- Added quote container -->
+        <div class="quote-container">
+          <p class="quote">
+            En traitant avec des imbéciles, vous devez adopter la philosophie
+            suivante : ils font simplement partie de la vie, comme des rochers
+            ou des meubles. Nous avons tous des aspects futiles... C'est la
+            nature humaine.
+          </p>
+          <p class="author">Robert Greene</p>
+        </div>
+
+        <div class="button-center">
+          <button onclick="startReview()">Start Reviewing</button>
+        </div>
+      </div>
+
+      <div id="review-page" class="hidden">
+        <h2 id="section-title"></h2>
+        <div class="pagination">
+          <button onclick="prevSection()">⬅ Previous</button>
+          <button onclick="nextSection()">Next ➡</button>
+        </div>
+        <div id="questions-container"></div>
+        <div class="pagination">
+          <button onclick="prevSection()">⬅ Previous</button>
+          <button onclick="nextSection()">Next ➡</button>
+        </div>
+      </div>
+    </div>
+<!-- Social skills, Love of learning, Patience, boredom, anxiety management -->
+    <script>
+      const courseData = [
+        {
+          title: "Section 0: Get Started with Microsoft Data Analytics",
+          questions: [
+            {
+              q: "What is data analysis?",
+              a: "Data analysis is the process of identifying, cleaning, transforming and modeling data to discover meaningful and useful information.",
+            },
+            {
+              q: "What are the types of analysis and the question they answer?",
+              a: {
+                type: "list",
+                items: [
+                  "- Descriptive analysis: What happened?",
+                  "- Diagnostic analysis: Why did it happen?",
+                  "- Predictive analysis: What is likely to happen?",
+                  "- Prescriptive analysis: What should we do about it?",
+                  "- Cognitive analysis: What does this means? How can we understand it intelligently?",
+                ],
+              },
+            },
+            {
+              q: "Enumerate several roles in data",
+              a: {
+                type: "list",
+                items: [
+                  "- Business analyst",
+                  "- Data analyst",
+                  "- Data engineer",
+                  "- Data scientist",
+                  "- Database administrator",
+                ],
+              },
+            },
+            {
+              q: "What are the tasks of a Data analyst?",
+              a: {
+                type: "list",
+                items: [
+                  "- Prepare",
+                  "- Model",
+                  "- Visualize",
+                  "- Analyse",
+                  "- Manage",
+                ],
+              },
+            },
+            {
+              q: "What are the primary components of Power BI",
+              a: {
+                type: "list",
+                items: [
+                  "- Power BI Desktop",
+                  "- Power BI service",
+                  "- Power BI mobile",
+                ],
+              },
+            },
+            {
+              q: "What are the building blocks of Power BI",
+              a: {
+                type: "list",
+                items: ["- Semantic models", "- Visualizations"],
+              },
+            },
+            {
+              q: "Enumerate several things you can do in the Power BI Service",
+              a: {
+                type: "list",
+                items: [
+                  "- Organize items in Workspaces",
+                  "- Create apps in Workspaces",
+                  "- Use template apps",
+                  "- Configure scheduled refreshes",
+                ],
+              },
+            },
+            {
+              q: "What can you do with copilot for Power BI?",
+              a: {
+                type: "list",
+                items: [
+                  "- Create measures based on natural language",
+                  "- Update the semantic model with synonyms for improved user Q & A experience",
+                  "- Generate report content, summary visuals, and pages from prepopulated prompts",
+                  "Analyse a summary of underlying semantic model",
+                  "🌙 Important: You still need to perform the data cleansing",
+                ],
+              },
+            },
+            {
+              q: "What is the difference between SQL, MDX, DAX and M?",
+              a: {
+                type: "list",
+                items: [
+                  "- SQL is the standard lanquage for quering relational databases",
+                  "- DAX is a language for formulas and tabular model in Power BI and SSAS",
+                  "- MDX is the query language for multidimentional OLAP cubes",
+                  "- M is the data transform language used in PowerQuery",
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: "Section 1: Prepare data for analysis with Power BI",
+          questions: [
+            {
+              q: "What is a flat file?",
+              a: "A flat file is a type of file that has only one data table and every row of data is in the same structure. The file doens't contains hierachies. Ex: .csv, .txt, .xlsx",
+            },
+            {
+              q: "What is a connector?",
+              a: "A connector is a software component that enables the tool to connect to and import data from various external data sources.",
+            },
+            {
+              q: "What is a dynamic report with parameters?",
+              a: "Dynamic reports are reports in which the data can be changed by a developer according to user specifications",
+            },
+            {
+              q: "What to remember when working with NoSQL databases?",
+              a: "It's often necessary to extract and normalize  the data first. Use the Expander button in Power Query.",
+            },
+            {
+              q: "What are some online services where you can get data from?",
+              a: "Sharepoint, OneDrive, Dynamics 365, Google Analytics...",
+            },
+            {
+              q: "What are the types of storage mode while importing data in Power BI?",
+              a: {
+                type: "list",
+                items: ["- Import", "- DirectQuery", "- Dual(Composite)"],
+              },
+            },
+            {
+              q: "What are things to know while importing data from Azure Analysis services? (!= SQL Server)",
+              a: {
+                type: "list",
+                items: [
+                  "- Already have calculations",
+                  "- If you don't need an entire table, you can query the data directy with DAX & MDX.",
+                ],
+              },
+            },
+            {
+              q: "What is Query folding?",
+              a: "Query folding is the process by which the transformations and the edits that you make in Power Query Editor are simulaneously tracked as native queries, or simple SELECT SQL statements, while you're actively making transformations",
+            },
+            {
+              q: "What the benefits of query folding",
+              a: {
+                type: "list",
+                items: [
+                  "- More efficiency in data refreshes and incremental refreshes",
+                  "- Automatic compatibility with DirectQuery and Dual Storage mode",
+                ],
+              },
+            },
+            {
+              q: "What native queries aren't possible for?",
+              a: {
+                type: "list",
+                items: [
+                  "- Adding an index column",
+                  "- Merging and appending columns of differents tables with two different sources",
+                  "- Changing the data type of a column",
+                ],
+              },
+            },
+            {
+              q: "What the steps to do query diagnostics?",
+              a: "Tools -> Start Diagnostics -> Stop Diagnostics",
+            },
+            {
+              q: "Enumerate some best practice for better performance.",
+              a: {
+                type: "list",
+                items: [
+                  "- Process as much data as possible in the original data source",
+                  "- Use native SQL queries",
+                  "- Separate data and time, if bound together",
+                ],
+              },
+            },
+            {
+              q: "How to resolve the following data import errors: (1) Power BI Query Error - Timeout expired, (2) We couldn't find any data formatted as a table, (3) Couldn't find file, (4) Data type errors",
+              a: {
+                type: "list",
+                items: [
+                  "- (1) Reduce the amount of data imported and the complexity of queries",
+                  "- (2) Ctrl + T in Excel",
+                  "- (3) Change file location",
+                  "- (4) Data type errors",
+                ],
+              },
+            },
+            {
+              q: "Enumerate some tasks to do while cleaning data in Power Query.",
+              a: {
+                type: "list",
+                items: [
+                  "Identify columns headers and names",
+                  "Remove headers",
+                  "Remove top rows (unecessary ones)",
+                  "Remove columns",
+                  "Unpivots columns",
+                  "PIvot columns",
+                  "Rename a query",
+                  "Replace a value",
+                  "Remove duplicates",
+                  "Evaluate and change column data types",
+                  "Combine multiple tabes into a single table",
+                ],
+              },
+            },
+            {
+              q: "What are two ways of combining tables",
+              a: {
+                type: "list",
+                items: [
+                  "- Merging (left outer, full outer, inner)",
+                  "- Appending",
+                ],
+              },
+            },
+            {
+              q: "What is data profiling?",
+              a: "Profiling data is about studing the nuances of data: dermining anomalies, examining and developing the underlying data structures, and querying data statistics such as row counts, values distributions, minimum and maximum values, overages and so on.",
+            },
+            {
+              q: "What is the number of rows does Power BI examing by default when profiling data?",
+              a: "1000",
+            },
+            {
+              q: "Where to modify M code?",
+              a: "In the Advanced Editor",
+            },
+            {
+              q: "What is data model?",
+              a: "Data model is a query-able resource that's optimised for anaylytics. Reports uses DAX or MDX.",
+            },
+            {
+              q: "What is a Power BI data set?",
+              a: "A Power BI data set is an artifact that's a osurce for visualization in Power BI reports and dashboards.",
+            },
+            {
+              q: "Enumerate the steps of an Analytic query",
+              a: "Filter -> Group -> Summarize",
+            },
+            {
+              q: "What is a tabular model?",
+              a: "A Power BI model is a tabular model. A tabular model comprises one or more tables of columns. It can also include relationships, hierachies and calculations.",
+            },
+            {
+              q: "What is a star schema?",
+              a: "A star schema is design used to produce optimized and easy-to-use tabular model, it requires to classify model tables as either dimemnsion or fact.",
+            },
+            {
+              q: "What is a dimension table?",
+              a: "A dimension tables decribe business entities; the things you model. Entities can include product, people, places, and concepts including time itself.",
+            },
+            {
+              q: "What is a fact table?",
+              a: "A fact tables store observations or events, and can be, for examples, sale orders, stock balances, exchanges rates, or temperature reading.",
+            },
+            {
+              q: "What are the table storage mode properties a table can have (except calculated table)?",
+              a: "Import, DirectQuery, Dual",
+            },
+            {
+              q: "What determines the model framework?",
+              a: "The table storage mode.",
+            },
+            {
+              q: "List the advantages and limitations of import model.",
+              a: {
+                type: "list",
+                items: [
+                  "- Advantages",
+                  "    - Support all Power BI source types ",
+                  "    - Can integrate source data",
+                  "    - Support all DAX  and Power Query (M) functionalities",
+                  "    - Support calculated tables",
+                  "    - Deliver best query performance",
+                  "- Limitations",
+                  "    - Model size",
+                  "    - Data refresh",
+                ],
+              },
+            },
+            {
+              q: "List the advantages and limitations of a DirectQuery model.",
+              a: {
+                type: "list",
+                items: [
+                  "- Advantages",
+                  "    - Model large or fast-changing data sources",
+                  "    - Enforce source RLS",
+                  "    - Data sovereignty restrictions",
+                  "    - Create specialized datasets",
+                  "- Limitations",
+                  "    - Not all source supported",
+                  "    - All Power Query(M) transformation are not possible, because these queries must translate to native queries that are understood by source systems.",
+                  "    - Analytics query performance can be slow",
+                  "    - Analytics queries can impact on source system performance.",
+                ],
+              },
+            },
+            {
+              q: "How to boost Direct Query model performance",
+              a: {
+                type: "list",
+                items: [
+                  "- Data source optimizations",
+                  "- DirectQuery user-defined aggregation tables",
+                ],
+              },
+            },
+            {
+              q: "List the advantages and limitations of composite model.",
+              a: {
+                type: "list",
+                items: [
+                  "- Advantages",
+                  "    - Design flexibily",
+                  "    - Boost performance of DirectQuery model",
+                  "    - Model can be extend with new calculated columns",
+                  "- Limitations",
+                  "    - Imported data can become out of sync",
+                  "    - Limited relationships when consolidating source group (To avoid this situation for higher-grain queries, you can add import aggregations). Dim table use dual storage mode",
+                  "    - When chaining models, upstream models can break downstream models.",
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: "Section 2: Model data with Power BI",
+          questions: [
+            {
+              q: "What is the importance of optimal models?",
+              a: "Optimal models are important for delivering good query performance and for minimising data refresh times and the use of service ressources.",
+            },
+            {
+              q: "What is an analytic query?",
+              a: "A query that produces a result from semantic model.",
+            },
+            {
+              q: "What are the steps of an analytic query?",
+              a: "Filer -> Group -> Summarize",
+            },
+            {
+              q: "What analytic query can we do with each fields (columns, hierachy levels, measures)?",
+              a: {
+                type: "list",
+                items: [
+                  "Columns: Filter, Group, Summarize",
+                  "Hierachy levels:  Filter, Group",
+                  "Measures: Group, Summarize",
+                ],
+              },
+            },
+            {
+              q: "What are the benefits of a good semantic model?",
+              a: {
+                type: "list",
+                items: [
+                  "Data exploration is faster",
+                  "Aggregations are simpler to build",
+                  "Reports are more accurate",
+                  "Writing reports takes less time",
+                  "Reports are easier to maintain in the future",
+                ],
+              },
+            },
+            {
+              q: "What describes a simple table structure?",
+              a: {
+                type: "list",
+                items: [
+                  "Simple to navigate because of columns and table properties that are specific and user-friendly.",
+                  "Have merged or appended tables to simplify the tables within your data structure",
+                  "Have good-quality relationships between tables that make sense.",
+                ],
+              },
+            },
+            {
+              q: "What are common way to build date table?",
+              a: "Source data, DAX, Power Query",
+            },
+            {
+              q: "What do Power BI do to a date type(if the table has not been marked as a date table)?",
+              a: "It automatically enters value of the date type as hierachy.",
+            },
+            {
+              q: "What is an hierachy",
+              a: "An hierachy is",
+            },
+            {
+              q: "Enumerate the type of hierachies",
+              a: {
+                type: "list",
+                items: [
+                  "Hierachy: ",
+                  "Parent-child hierachy: ",
+                  "Flatten parent-child hierachy: ",
+                  "Role-playing dimensions: ",
+                ],
+              },
+            },
+            {
+              q: "What is the directionality of a relationship?",
+              a: "",
+            },
+            {
+              q: "Enumarate some modeling chanlenge and how to resolve them.",
+              a: {
+                type: "list",
+                items: ["Circular relationships: ", "", ""],
+              },
+            },
+            {
+              q: "What are the kind of calculations can be added to a semantic model with DAX?",
+              a: {
+                type: "list",
+                items: [
+                  "- Calculated tables (can't connect to external data in the model, use Power Query): Date tables(CALENDAR, CALENDARAUTO), Role playing dimensions(USERELATIONSHIP), What-if analysis(disconnected tables)",
+                  "- Calculated columns",
+                  "- Measures: Unlike calculated columns which are evaluated at data refresh time, measures are evaluated at query time. Their results are never stored in the model.",
+                  "- Important: DAX can also be use to define RLS which are expression that enforces filters over model tables",
+                ],
+              },
+            },
+            {
+              q: "What is an implicit measure?",
+              a: "Implicit measures are automatic behaviors that allow visuals to summarize model column data.",
+            },
+            {
+              q: "In what consist a DAX formula?",
+              a: {
+                type: "list",
+                items: [
+                  "- DAX functions",
+                  "- DAX operators",
+                  "- Constant values",
+                  "- DAX variables",
+                  "- References to model objects",
+                  "- White spaces",
+                ],
+              },
+            },
+            {
+              q: "What is the model calculation syntax?",
+              a: "<calculation name> = <DAX formula>",
+            },
+            {
+              q: "Enumerate Model data types and the corresponding DAX data types.",
+              a: {
+                type: "list",
+                items: [
+                  "MODEL DATA TYPE vs DAX DATA TYPE",
+                  "Whole number vs 64-int Integer",
+                  "Decimal number vs 64-bit real",
+                  "Boolean vs Boolean",
+                  "Text vs String",
+                  "Date vs Date/Time",
+                  "Currency vs Currency",
+                  "N/A vs BLANK",
+                ],
+              },
+            },
+            {
+              q: "List the DAX functions that cannot be found in Excel",
+              a: {
+                type: "list",
+                items: [
+                  "Relationship navigation function",
+                  "Filter context modification function",
+                  "Iterator function",
+                  "Time intelligence functions",
+                  "Path functions",
+                ],
+              },
+            },
+            {
+              q: "List some DAX functions that originate from Excel",
+              a: "SUM, COUNT, AVERAGE, MIN, MAX, ABS, ROUND, SORT, LEN, LEFT, RIGHT, UPPER, DATE, YEAR, MONTH, NOW, ISNUMBER, TRUE, FALSE, AND, OR, NOT, IFERROR",
+            },
+            {
+              q: "List some DAX functions that don't originate from Excel",
+              a: "DISTINCTCOUNT DIVIDE(<numerator>, <denominator>[,<alternative value>])",
+            },
+            {
+              q: "List the DAX operators",
+              a: "+ - * / ^ = == < > <= >= <> && || IN NOT",
+            },
+            {
+              q: "The falsy values",
+              a: "FALSE, BLANK, O,'' '',December 30, 1899",
+            },
+            {
+              q: "How to declare and use a DAX variable?",
+              a: "",
+            },
+            {
+              q: "What is a simple measure",
+              a: "A simple measure is one that aggregates the values of a single column or a single table.",
+            },
+            {
+              q: "What is a compound measure",
+              a: "A compound measure is one that reference one or more measures",
+            },
+            {
+              q: "What is the role of a quick measure",
+              a: "They help you to quickly perform, powerful calculations by generating the DAX expression for you.",
+            },
+            {
+              q: "How does the data modeler limit summarization options",
+              a: "By adding measures and hiding columns.",
+            },
+            {
+              q: "Comparison between calculated columns and measures: similarities",
+              a: {
+                type: "list",
+                items: [
+                  "Calculations you can add to your semantic model",
+                  "Defined by using DAX formulas",
+                  "Referenced in DAX formulas by enclosing their names within square brackets",
+                ],
+              },
+            },
+            {
+              q: "Comparison between calculated columns and measures: diffences",
+              a: {
+                type: "list",
+                items: [
+                  "Calculated columns vs Measures",
+                  "Purpose: Extend table with new columns vs Define how to summarize model data",
+                  "Evaluation: Evaluated by using row context at data refresh time vs evaluated by using filter context at query time",
+                  "Storage: Store values for each row in the table vs Never stores values in the model",
+                  "Visual use: Can be use to filter, group or summarize VS designed to summarized",
+                ],
+              },
+            },
+            {
+              q: "What is row context?",
+              a: "",
+            },
+            {
+              q: "What is filter context?",
+              a: "Filter context describes the filters that are applied during the evaluation of a measure or measure expression.",
+            },
+            {
+              q: "How to use filter context?",
+              a: "",
+            },
+            {
+              q: "How to modify filter context?",
+              a: {
+                type: "list",
+                items: ["", "", ""],
+              },
+            },
+            {
+              q: "What is time intelligence?",
+              a: "Time intelligence in DAX calculations means modifiying the filter context for date filters.",
+            },
+            {
+              q: "Enumerate some ways to optimize a model performance in Power BI.",
+              a: {
+                type: "list",
+                items: [
+                  "Review performance of measures, relationships and visuals",
+                  "Use variables to improve performance and troubleshooting",
+                  "Reduce cardinality",
+                  "Optimize DirectQuery models with table level storage",
+                  "Create and manage aggreations",
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: "Section 3: Build Power BI visuals and reports",
+          questions: [
+            {
+              q: "Who are the broad report consumer audience and their associated report type?",
+              a: {
+                type: "list",
+                items: [
+                  "Executive: Dashboard",
+                  "Analyst: Analytical reports",
+                  "Informational worker: Operational reports",
+                  "General: Educational reports",
+                ],
+              },
+            },
+            {
+              q: "What are the purpose of each type of reports?",
+              a: {
+                type: "list",
+                items: [
+                  "- The primary goal of a Dashboard is to interpret the story as quickly as possible. How are we doing? Are we there yet?",
+                  "- The primary gaol of an analytical report is to help report consumers discover answers to a broad array of questions by interacting wiht the report and its visuals. Why dit that happen? What might happen next?",
+                  "- Operational report are designed to give the report consumer the ability to monitor current or real-time data, make decisions, and act on those decisions.",
+                  "- Educational reports assume that the report consumer is unfamiliar with the data or context.",
+                ],
+              },
+            },
+            {
+              q: "What are some user interface requirements",
+              a: {
+                type: "list",
+                items: [
+                  "Form factor: describes the size of the hardware that is used to open report, and the page orientation (portrait or landscape)",
+                  "Input method",
+                  "Style and theme",
+                  "Accessibilty",
+                ],
+              },
+            },
+            {
+              q: "What is the hierachy of reports and their sub-elements?",
+              a: "Report -> Pages -> Vieuals + Elements",
+            },
+            {
+              q: "What are the analytical report layout features?",
+              a: "Placement Balance Proximity Contrast Repetition",
+            },
+            {
+              q: "What element to consider when trying to build visually appealing reports?",
+              a: "Space Marging Object Spacing Size Alignment Color Consistency",
+            },
+            {
+              q: "The types of report visuals",
+              a: {
+                type: "list",
+                items: [
+                  "Categorical visuals",
+                  "Time series visuals",
+                  "Proportional visuals",
+                  "Numerical visuals",
+                  "Grid visuals",
+                  "Performance visuals",
+                  "Geospacial visuals",
+                  "KPI visuals",
+                ],
+              },
+            },
+            {
+              q: "What are visual calculations?",
+              a: "Visual calculations in Power BI are Data Analytics Expressions calculations defined on a visual",
+            },
+            {
+              q: "Understand visual calculations",
+              a: "They usually perform better than measure calculations. Their scope is limited to the visual.",
+            },
+            {
+              q: "What is the use of visual calculations parameters?",
+              a: "Visual calculation have optional parameters to help you create complex calculations with minimal code: axis parameter, reset parameter.",
+            },
+            {
+              q: "Enumerate the levels at which filtering can occurs in Power BI.",
+              a: "Semantic model (RLS) -> Report -> Page -> Visual -> Measure",
+            },
+            {
+              q: "Explain how to apply each previous filter from the report structure.",
+              a: {
+                type: "list",
+                items: ["", "", ""],
+              },
+            },
+            {
+              q: "What is a slicer?",
+              a: "A slicer is a visual component with one purpose: filter other visuals.",
+            },
+            {
+              q: "Explain the following advanced filtering techniques: Visual interaction, Drillthrough, Report tooltip, Bookmarks, Report options, Query reduction options, Consumption-time filtering",
+              a: {
+                type: "list",
+                items: ["", "", ""],
+              },
+            },
+            {
+              q: "How to enhance Power BI report design for user experience?",
+              a: {
+                type: "list",
+                items: [
+                  "Design reports to show details",
+                  "Design reports to highlight values",
+                  "Design reports that behaves like apps",
+                  "Work with bookmarks",
+                  "Design report for navigation",
+                  "Work with visual headers",
+                  "Design reports with built-in assistance",
+                  "Tune report performance",
+                  "Optimize reports for mobile use",
+                ],
+              },
+            },
+            {
+              q: "How to perform analytics in Power BI?",
+              a: {
+                type: "list",
+                items: [
+                  "Explore statistical summary",
+                  "Identify outliers with Power BI visuals",
+                  "Group and bin data for analysis",
+                  "Apply clustering techniques",
+                  "Conduct time series analysis",
+                  "Use the analyse feature",
+                  "Create what if parameters",
+                  "Use specialized visuals",
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title:
+            "Section 4: Manage workspaces and semantics models in Power BI",
+          questions: [
+            {
+              q: "What is a workspace",
+              a: "A workspace is a centralized repository in which you can collaborate with colleagues and teams to create collections of reports and dashboards",
+            },
+            {
+              q: "What are the steps to create and distribute a report or dashboard?",
+              a: {
+                type: "list",
+                items: [
+                  "Create a workspace",
+                  "Assign roles in workspace (Admin, Member, Contributor, Viewer)",
+                  "Create and configure an app",
+                  "Update workspace",
+                ],
+              },
+            },
+            {
+              q: "How to monitor usage and performance?",
+              a: "Configure and view usage metric reports",
+            },
+            {
+              q: "What do we use to connect to on-premise data sources?",
+              a: "A Power BI gateway",
+            },
+            {
+              q: "What are the two types of gateways",
+              a: "",
+            },
+            {
+              q: "What need to be done before creating a scheduler refresh",
+              a: "A created gateway connection",
+            },
+            {
+              q: "What is incremental refresh",
+              a: "It allow you to refresh large semantic models quickly and as often you need, without having to reload historical data each time",
+            },
+            {
+              q: "What is the process of implementing incremental refresh?",
+              a: {
+                type: "list",
+                items: [
+                  "1. Define the filter parameter (RangeStart & RangeEnd)",
+                  "2. Use the parameters to apply a filter",
+                  "3. Define the incremental refresh policy",
+                  "4. Publish changes to Power BI servives",
+                ],
+              },
+            },
+            {
+              q: "What are the two ways of endorsing a semantic model.",
+              a: "Promotion and Certification",
+            },
+            {
+              q: "How to boost performance with premium",
+              a: "Query caching",
+            },
+            {
+              q: "Enumerate differences between reports and dashboard",
+              a: {
+                type: "list",
+                items: [
+                  "Dashbaord VS Report",
+                  "Create only in service vs Create in Power BI Desktop (Limited in service)",
+                  "Single page vs Multiple page",
+                  "Static tiles vs Interactive visuals",
+                  "Read-only tiles vs Filter pane",
+                ],
+              },
+            },
+            {
+              q: "Enumerate visual that can be use for data alerts",
+              a: "KPI visuals, gauges and cards",
+            },
+            {
+              q: "Which feature do we use to explore data by asking questions",
+              a: "Q&A feature",
+            },
+            {
+              q: "Which feature do we use to explore data by having quick insights",
+              a: "Quick insights feature",
+            },
+            {
+              q: "Enumerate other thing that can be done in a dashboard",
+              a: {
+                type: "list",
+                items: [
+                  "Add a dashboard theme",
+                  "Pin a live report page to a dashboard",
+                  "Configure a real-time dashboard",
+                  "Set mobile view",
+                ],
+              },
+            },
+            {
+              q: "What are the two ways of implementing row-level security?",
+              a: "Static method and dynamic method",
+            },
+            {
+              q: "Steps to implement row level security with static method",
+              a: {
+                type: "list",
+                items: [
+                  "1. Create a report in MS Power BI Desktop",
+                  "    a. Import the data",
+                  "    b. Confirm the semantic model between both tables",
+                  "    c. Create the report visuals",
+                  "2. Create RLS roles in Power BI Desktop by using DAX",
+                  "3. Test the roles in Power BI Desktop",
+                  "4. Deploy the roles in Power BI Desktop",
+                  "5. Add members to the role in Power BI service",
+                  "6. Test the roles in Power BI service",
+                ],
+              },
+            },
+            {
+              q: "How to implement row level security with the dynamic method?",
+              a: "",
+            },
+          ],
+        },
+      ];
+
+      {
+        let currentSection = 0;
+
+        function startReview() {
+          document.getElementById("start-page").classList.add("hidden");
+          document.getElementById("review-page").classList.remove("hidden");
+          renderSection();
+        }
+
+        function renderSection() {
+          const section = courseData[currentSection];
+          document.getElementById("section-title").textContent = section.title;
+          const container = document.getElementById("questions-container");
+          container.innerHTML = "";
+
+          let count = 1;
+          section.questions.forEach((item) => {
+            const details = document.createElement("details");
+            details.className = "card";
+            const summary = document.createElement("summary");
+            summary.textContent = count + ". " + item.q;
+            const answer = document.createElement("div");
+            answer.className = "answer-content";
+            count++;
+
+            if (typeof item.a === "string") {
+              // Handle plain text answers with potential line breaks
+              const paragraphs = item.a.split("\n");
+              paragraphs.forEach((para) => {
+                if (para.trim()) {
+                  const p = document.createElement("p");
+                  p.textContent = para;
+                  answer.appendChild(p);
+                }
+              });
+            } else if (item.a.type === "list") {
+              // Handle list answers
+              const ul = document.createElement("ul");
+              item.a.items.forEach((listItem) => {
+                const li = document.createElement("li");
+                li.textContent = listItem;
+                ul.appendChild(li);
+              });
+              answer.appendChild(ul);
+            }
+
+            details.appendChild(summary);
+            details.appendChild(answer);
+            container.appendChild(details);
+          });
+
+          updateProgressBar();
+        }
+
+        function nextSection() {
+          if (currentSection < courseData.length - 1) {
+            currentSection++;
+            renderSection();
+          }
+        }
+
+        function prevSection() {
+          if (currentSection > 0) {
+            currentSection--;
+            renderSection();
+          }
+        }
+
+        function updateProgressBar() {
+          const progress = ((currentSection + 1) / courseData.length) * 100;
+          document.getElementById("progress-bar").style.width = `${progress}%`;
+        }
+      }
+    </script>
+  </body>
+</html>

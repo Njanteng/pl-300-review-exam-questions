@@ -1,0 +1,168 @@
+:root {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --text: #e0e0e0;
+  --accent: #4f46e5;
+  --border: #2c2c2c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background-color: #2c2c2c;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--accent);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3730a3;
+}
+
+.button-center {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card summary {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: 600;
+  background-color: var(--surface);
+  list-style: none;
+}
+
+.card[open] summary {
+  background-color: #2a2a2a;
+}
+
+.card .answer-content {
+  padding: 1rem;
+  margin: 0;
+  border-top: 1px solid var(--border);
+  background-color: #191919;
+}
+
+.card ul,
+.card ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.card li {
+  margin-bottom: 0.25rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .pagination {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pagination button {
+    width: 100%;
+  }
+}
+
+details {
+  transition: all 0.3s ease;
+}
+
+details[open] {
+  animation: expand 0.3s ease-in-out;
+}
+
+@keyframes expand {
+  from {
+    transform: scaleY(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* New quote styles */
+.quote-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #2c2c2c;
+  border-left: 8px solid #3730a3;
+  border-radius: 4px;
+}
+.quote {
+  font-style: italic;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 10px;
+}
+.author {
+  text-align: right;
+  font-weight: bold;
+  color: #666;
+}
+.author::before {
+  content: "— ";
+}
